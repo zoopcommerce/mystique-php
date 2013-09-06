@@ -16,7 +16,7 @@ class Email extends Base
 
     protected $regex;
 
-    public function __construct(array $options = [])
+    public function __construct()
     {
         $this->regex = implode(
             '',

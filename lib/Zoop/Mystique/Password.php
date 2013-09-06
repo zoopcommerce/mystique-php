@@ -20,7 +20,7 @@ class Password extends Base
 
     protected $containNumRegEx = '/[0-9]/';
 
-    public function __construct(array $options = [])
+    public function __construct()
     {
         $this->length = new Length(['min' => 6, 'max' => 40]);
     }
