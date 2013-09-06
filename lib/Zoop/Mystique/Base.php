@@ -79,8 +79,4 @@ abstract class Base implements ValidatorInterface
     }
 
     abstract public function isValid($value);
-
-    public function __construct(array $options = [])
-    {
-    }
 }

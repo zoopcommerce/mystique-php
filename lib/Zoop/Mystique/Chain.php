@@ -38,23 +38,23 @@ class Chain extends Base
         $result = new Result(['value' => true]);
 
         foreach ($this->validators as $validator) {
-            if ($result && method_exists($validator, 'getSkipOnPass') && $validator->getSkipOnPass()) {
+            if (($result->getValue() && $validator->getSkipOnPass()) ||
+                ! $result->getValue() && $validator->getSkipOnFail()
+            ) {
                 continue;
             }
-            if (! $result && method_exists($validator, 'getSkipOnFail') && $validator->getSkipOnFail()) {
-                continue;
-            }
+
             $validatorResult = $validator->isValid($value);
             if (! $validatorResult->getValue()) {
+
                 $result->setValue(false);
-                foreach ($validatorResult->getMessages() as $message) {
-                    $result->addMessage($message);
-                }
-                if (method_exists($validator, 'getHaltOnFail') && $validator->getHaltOnFail()) {
+                $result->addMessages($validatorResult->getMessages());
+
+                if ($validator->getHaltOnFail()) {
                     return $result;
                 }
             }
-            if (method_exists($validator, 'getHaltOnPass') && $validator->getHaltOnPass()) {
+            if ($validator->getHaltOnPass()) {
                 return $result;
             }
         }

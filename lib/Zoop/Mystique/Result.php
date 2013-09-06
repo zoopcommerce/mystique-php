@@ -33,6 +33,11 @@ class Result
         $this->messages[] = $message;
     }
 
+    public function addMessages(array $messages)
+    {
+        $this->messages = array_merge($this->messages, $messages);
+    }
+
     public function setMessages(array $messages)
     {
         $this->messages = $messages;

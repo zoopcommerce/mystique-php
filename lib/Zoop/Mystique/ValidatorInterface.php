@@ -13,6 +13,15 @@ namespace Zoop\Mystique;
  */
 interface ValidatorInterface
 {
+
+    public function getHaltOnPass();
+
+    public function getHaltOnFail();
+
+    public function getSkipOnPass();
+
+    public function getSkipOnFail();
+
     /**
      *
      * @param  mixed $value
